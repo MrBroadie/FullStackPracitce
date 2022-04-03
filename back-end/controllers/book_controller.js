@@ -1,3 +1,4 @@
+const User = require('../models/user.js')
 const Book = require('../models/book.js')
 
 //get all books index
@@ -25,10 +26,18 @@ async function show (ctx) {
 //create one book create
 async function create (ctx) {
   try {
-    //destructure for security --> instead just ctx.request.body which could be full of harmful data
     const { title, author, price } = ctx.request.body //when post request is sent it needs these 3 variables 
-    const book = await Book.create({ title, author, price })
-    ctx.body = book
+    if (ctx.params.user_id) {
+      const book = await Book.create({ title, author, price })
+      const user = await User.findById(ctx.params.user_id)
+      user.books.push(book)
+      await user.save() // saves the user books propery to the database this is a mongoose function
+      ctx.body = book //returning the body
+    } else {
+      //destructure for security --> instead just ctx.request.body which could be full of harmful data
+      const book = await Book.create({ title, author, price })
+      ctx.body = book
+    }
   } catch (e) {
     console.error(e)
     ctx.status = 500

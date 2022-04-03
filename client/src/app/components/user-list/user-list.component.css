@@ -1,0 +1,12 @@
+.userList {
+  background-color: black;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  min-height: 300px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.userList li a{
+  color: white;
+}

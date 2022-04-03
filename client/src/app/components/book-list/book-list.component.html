@@ -1,0 +1,8 @@
+<section>
+  <h2>Book list</h2>
+  <ul class="bookList">
+    <li *ngFor="let book of bookList">
+      <a routerLink="/bookDetails/{{book._id}}">{{book.title}}</a>
+    </li>
+  </ul>
+</section>

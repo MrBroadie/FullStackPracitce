@@ -23,4 +23,8 @@ export class ApiService {
     return this.http.get<User[]>(this.rootUrl + '/users')
   }
 
+  getBook(id: string): Observable<Book> {
+    return this.http.get<Book>(`${this.rootUrl}/books/${id}`)
+  }
+  
 }
